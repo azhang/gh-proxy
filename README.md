@@ -29,12 +29,18 @@ GET https://your-worker.workers.dev/[owner]/[repo]/[filepath]?token=[github-toke
 - `repo`: Repository name  
 - `filepath`: Path to the file in the repository (supports nested paths)
 - `token`: GitHub personal access token (passed as query parameter)
+- `ref` (optional): branch, tag, or commit SHA. Defaults to the repo's default branch.
 
 ### Examples
 
 Fetch a file from the root:
 ```
 https://your-worker.workers.dev/myuser/myrepo/config.yaml?token=ghp_xxxx
+```
+
+Fetch from a branch or tag (e.g. a beta config subscription):
+```
+https://your-worker.workers.dev/myuser/myrepo/config.yaml?token=ghp_xxxx&ref=beta
 ```
 
 Fetch a nested file:

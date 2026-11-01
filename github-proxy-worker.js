@@ -19,8 +19,14 @@ export default {
     const repo = pathParts[1];
     const filePath = pathParts.slice(2).join('/'); // Handle nested paths
     
+    // Optional branch, tag, or commit SHA; omitted means the repo's default branch
+    const ref = url.searchParams.get('ref');
+
     // Build GitHub API URL
-    const githubApiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+    let githubApiUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${filePath}`;
+    if (ref) {
+      githubApiUrl += `?ref=${encodeURIComponent(ref)}`;
+    }
     
     const response = await fetch(githubApiUrl, {
       headers: {
